@@ -88,7 +88,7 @@ DATABASES = {
 'ENGINE': 'django.db.backends.mysql',
 'NAME': 'superaans$testEhei',
 'USER': 'superaans',
-'PASSWORD': '',
+'PASSWORD': 'a12345678',
 'HOST': 'superaans.mysql.pythonanywhere-services.com',
 'PORT': '3306',
 
