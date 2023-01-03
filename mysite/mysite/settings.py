@@ -86,10 +86,10 @@ DATABASES = {
 'default': {
 
 'ENGINE': 'django.db.backends.mysql',
-'NAME': 'dht11ehei',
-'USER': 'root',
-'PASSWORD': '',
-'HOST': 'localhost',
+'NAME': 'superaans$testEhei',
+'USER': 'superaans',
+'PASSWORD': 'Aans004123',
+'HOST': 'superaans.mysql.pythonanywhere-services.com',
 'PORT': '3306',
 
 }
