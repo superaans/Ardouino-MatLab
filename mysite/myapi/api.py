@@ -17,16 +17,6 @@ def Dlist(request):
     data = DhtSerializer(all_data, many=True).data
     return Response({'data': data})
 
-@api_view(['POST'])
-def AddDht(request):
-
-    serializer = DhtSerializer(data=request.data)
-    if serializer.is_valid():
-
-        serializer.save()
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
-
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 def send_to_telegram(message):
 
@@ -38,6 +28,20 @@ def send_to_telegram(message):
         response = rq.post(apiURL, json={'chat_id': chatID, 'text': message})
     except Exception as e:
         print(e)
+
+@api_view(['POST'])
+def AddDht(request):
+
+    serializer = DhtSerializer(data=request.data)
+    if serializer.is_valid():
+
+        serializer.save()
+        if int(serializer.data.get('temp')) >= 30 :
+            send_to_telegram(serializer.data.get('temp'))
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 class Dhtviews(generics.CreateAPIView):
     queryset = Dht11.objects.all()
