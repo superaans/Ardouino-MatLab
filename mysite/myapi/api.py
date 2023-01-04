@@ -15,8 +15,8 @@ def Dlist(request):
 
 @api_view(['POST'])
 def AddDht(request):
-    if int(request.POST.get('temp', 99)) <= 10:
-        send_to_telegram(request.data["temp"])
+    #if int(request.POST.get('temp', 99)) <= 10:
+        #send_to_telegram(request.data["temp"])
     serializer = DhtSerializer(data=request.data)
     if serializer.is_valid():
 
