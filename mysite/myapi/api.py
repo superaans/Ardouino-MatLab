@@ -4,8 +4,7 @@ from rest_framework.decorators import api_view
 from .models import Dht11
 from .serializers import DhtSerializer
 
-import telegram
-import requests
+import requests as rq
 
 
 class Dhtviews(generics.CreateAPIView):
@@ -20,6 +19,7 @@ def Dlist(request):
 
 @api_view(['POST'])
 def AddDht(request):
+
     serializer = DhtSerializer(data=request.data)
     if serializer.is_valid():
 
@@ -35,7 +35,10 @@ def send_to_telegram(message):
     apiURL = f'https://api.telegram.org/bot{apiToken}/sendMessage'
 
     try:
-        response = requests.post(apiURL, json={'chat_id': chatID, 'text': message})
+        response = rq.post(apiURL, json={'chat_id': chatID, 'text': message})
     except Exception as e:
         print(e)
 
+class Dhtviews(generics.CreateAPIView):
+    queryset = Dht11.objects.all()
+    serializer_class = DhtSerializer
