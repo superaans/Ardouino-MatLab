@@ -7,6 +7,11 @@ from .serializers import DhtSerializer
 import telegram
 import requests
 
+
+class Dhtviews(generics.CreateAPIView):
+    queryset = Dht11.objects.all()
+    serializer_class = DhtSerializer
+
 @api_view(['GET'])
 def Dlist(request):
     all_data = Dht11.objects.all()
@@ -15,8 +20,6 @@ def Dlist(request):
 
 @api_view(['POST'])
 def AddDht(request):
-    if(int(request.data["temp"]) <= 10):
-        send_to_telegram(request.data["temp"])
     serializer = DhtSerializer(data=request.data)
     if serializer.is_valid():
 
@@ -33,10 +36,6 @@ def send_to_telegram(message):
 
     try:
         response = requests.post(apiURL, json={'chat_id': chatID, 'text': message})
-        print(response.text)
     except Exception as e:
         print(e)
 
-class Dhtviews(generics.CreateAPIView):
-    queryset = Dht11.objects.all()
-    serializer_class = DhtSerializer
