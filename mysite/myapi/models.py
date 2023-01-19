@@ -11,4 +11,5 @@ class Dht11(models.Model):
     id = models.AutoField(primary_key = True)
     temp = models.FloatField(null=False)
     hum = models.FloatField(null=False)
-    dt = models.DateTimeField(null=False)
+    dt = models.DateTimeField(auto_now_add=True,null=False)
+
