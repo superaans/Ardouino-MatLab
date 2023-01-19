@@ -8,12 +8,12 @@ import requests as rq
 
 
 class Dhtviews(generics.CreateAPIView):
-    queryset = Dht11.objects.all()
+    queryset = Dht11.objects.all().order_by('-dt')
     serializer_class = DhtSerializer
 
 @api_view(['GET'])
 def Dlist(request):
-    all_data = Dht11.objects.all()
+    all_data = Dht11.objects.all().order_by('-dt')
     data = DhtSerializer(all_data, many=True).data
     return Response({'data': data})
 
@@ -44,5 +44,5 @@ def AddDht(request):
 
 
 class Dhtviews(generics.CreateAPIView):
-    queryset = Dht11.objects.all().order_by('-temp')
+    queryset = Dht11.objects.all().order_by('-dt')
     serializer_class = DhtSerializer
