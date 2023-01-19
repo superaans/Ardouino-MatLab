@@ -44,5 +44,5 @@ def AddDht(request):
 
 
 class Dhtviews(generics.CreateAPIView):
-    queryset = Dht11.objects.all()
+    queryset = Dht11.objects.all().order_by('-temp')
     serializer_class = DhtSerializer
